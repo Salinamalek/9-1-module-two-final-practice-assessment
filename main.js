@@ -1,6 +1,5 @@
 const url = "https://ghibliapi.herokuapp.com/people"
 
-let people; 
 const select = document.querySelector("select");
 
 
@@ -8,7 +7,6 @@ fetch(url)
     .then((res) => res.json())
     .then((resJson) => {
     // console.log(resJson)
-    people = resJson
     for (let i = 0; i < resJson.length; i++) {
         const name = resJson[i].name
         const newOpt = document.createElement("option");
@@ -25,23 +23,36 @@ select.addEventListener("change", () => {
     .then((res) => res.json())
     .then((resJson) => {
         // console.log(resJson)
-        const div = document.querySelector('#info')
-        div.innerHTML = ""
+        const info = document.querySelector('#info')
+        info.innerHTML = ""
         const names = document.createElement('h4')
-        names.innerHTML = resJson.name
-        div.append(names);
+        names.innerHTML = `Name: ${resJson.name}`
+        info.append(names);
 
         const age = document.createElement('p')
-        age.innerHTML = resJson.age
-        div.append(age);
+        age.innerHTML = `Age: ${resJson.age}`
+        info.append(age);
 
         const eyeColor = document.createElement('p')
-        eyeColor.innerHTML = resJson.eye_color
-        div.append(eyeColor);
+        eyeColor.innerHTML = `Eye Color: ${resJson.eye_color}`
+        info.append(eyeColor);
 
         const hairColor = document.createElement('p')
-        hairColor.innerHTML = resJson.hair_color
-        div.append(hairColor);
+        hairColor.innerHTML = `Hair Color: ${resJson.hair_color}`
+        info.append(hairColor);
+        
+        const form = document.querySelector('form')
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const shoutout = document.querySelector('#shoutout')
+            let shoutoutVal = shoutout.value
+            const ul = document.querySelector('ul')
+            // ul.innerHTML = ''
+            const li = document.createElement('li')
+            li.innerHTML = `<strong>${resJson.name}: ${shoutoutVal}</strong>`
+            ul.append(li);
+        })
+        form.reset()
     })
     .catch((err) => console.log(err))
 });
