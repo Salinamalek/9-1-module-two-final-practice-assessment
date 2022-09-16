@@ -25,12 +25,23 @@ select.addEventListener("change", () => {
     .then((res) => res.json())
     .then((resJson) => {
         // console.log(resJson)
-        const h4 = document.querySelector('h4')
-        h4.innerHTML = ""
-        h4.innerHTML = resJson.name
-        const pAge = document.createElement('p')
-        pAge.innerHTML = resJson.age
-        h4.append(pAge)
+        const div = document.querySelector('#info')
+        div.innerHTML = ""
+        const names = document.createElement('h4')
+        names.innerHTML = resJson.name
+        div.append(names);
+
+        const age = document.createElement('p')
+        age.innerHTML = resJson.age
+        div.append(age);
+
+        const eyeColor = document.createElement('p')
+        eyeColor.innerHTML = resJson.eye_color
+        div.append(eyeColor);
+
+        const hairColor = document.createElement('p')
+        hairColor.innerHTML = resJson.hair_color
+        div.append(hairColor);
     })
     .catch((err) => console.log(err))
 });
