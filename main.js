@@ -43,16 +43,27 @@ select.addEventListener("change", () => {
         
         const form = document.querySelector('form')
         form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const shoutout = document.querySelector('#shoutout')
-            let shoutoutVal = shoutout.value
-            const ul = document.querySelector('ul')
-            // ul.innerHTML = ''
-            const li = document.createElement('li')
-            li.innerHTML = `<strong>${resJson.name}: ${shoutoutVal}</strong>`
-            ul.append(li);
-        })
-        form.reset()
+        event.preventDefault();
+        const shoutout = document.querySelector('#shoutout')
+        let shoutoutVal = shoutout.value
+        const ul = document.querySelector('ul')
+        ul.innerHTML = ''
+        const li = document.createElement('li')
+        li.innerHTML = `<strong>${resJson.name}: ${shoutoutVal}</strong>`
+        ul.append(li);
+            
+            
+        // if (!shoutoutVal){
+        //     const p = document.createElement('p')
+        //     p.classList.add('error')
+        //     p.innerHTML = `Must add a shoutout for ${resJson.name}`
+        //     form.append(p)
+        // } else {
+        //     header4.removeChild(p)
+        // }
+                    
+        });
+        form.reset();
     })
     .catch((err) => console.log(err))
 });
